@@ -19,6 +19,7 @@ export default class Home extends Component {
       searchArr: [],
       page: 1,
       searchTrigger: false,
+      imgs: null,
     };
     this.handleAll = this.handleAll.bind(this);
   }
@@ -92,12 +93,26 @@ export default class Home extends Component {
     }, 1000);
   }
   dateTimeZone(utcDate) {
-    debugger;
     const date = new Date(utcDate);
     console.log(date);
     let formated = moment(date).format("DD - MM - YYYY h:mm:ss");
     // var offset = date.getTimezoneOffset();
     return formated;
+  }
+  importAll(r) {
+    return r.keys().map(r);
+  }
+  imageRender(id) {
+    this.state.imgs = this.importAll(
+      require.context(`../../player-images/`, false, /\.(png|jpe?g|svg)$/)
+    );
+    for (let j = 0; j < this.state.imgs.length; j++) {
+      if (this.state.imgs[j].includes(id)) {
+        debugger;
+        return this.state.imgs[j];
+      }
+    }
+    console.log("Images=>", this.state.imgs);
   }
   render() {
     return (
@@ -128,13 +143,14 @@ export default class Home extends Component {
         </div>
         <div className="row shadow-lg">
           <div className="row justify-content-center">
-            <div className="col-lg-12 opaque">
+            <div className="col-lg-12 ">
               <div className=" p-2 mt-4">
                 {this.state.searchTrigger === false
                   ? this.state.footArr.map((el, index) => {
-                      const Images = React.lazy(() =>
-                        import(`../../player-images/${el.Id}`)
-                      );
+                      // const Images = React.lazy(() =>
+                      //   import(`../../player-images/${el.Id}`)
+                      // );
+                      let imigur = this.imageRender(el.Id);
                       return (
                         <>
                           <div className="card my-2 shadow " key={index}>
@@ -142,7 +158,7 @@ export default class Home extends Component {
                               <div className="col-1">
                                 <div className="wrapper-img">
                                   <img
-                                    src={Images}
+                                    src={imigur}
                                     alt="img"
                                     className="img-fluid  anime-img"
                                   />
@@ -206,23 +222,22 @@ export default class Home extends Component {
                       );
                     })
                   : this.state.searchArr.map((el, index) => {
-                      const Images = React.lazy(() =>
-                        import(`../../player-images/${el.Id}`)
-                      );
+                      let imigur = this.imageRender(el.Id);
+
                       return (
                         <>
                           <div className="card my-2 shadow " key={index}>
-                            <div className="row ">
+                            <div className="row">
                               <div className="col-1">
                                 <div className="wrapper-img">
                                   <img
-                                    src={Images}
+                                    src={imigur}
                                     alt="img"
                                     className="img-fluid  anime-img"
                                   />
                                 </div>
                               </div>
-                              <div className="col-4 mx-4">
+                              <div className="col-2 mx-4">
                                 <div className="wrap-my-content">
                                   <div className="my-content">
                                     <div className="anime-header">
@@ -244,14 +259,33 @@ export default class Home extends Component {
                                   </p>
                                 </div>
                               </div>
-                              <div className="col-5">
+                              <div className="col-3">
                                 <div className="my-arrow h-100">
                                   <div className="d-flex justify-content-end align-items-center h-100">
-                                    <img
-                                      src={arrowImage}
-                                      alt="arrow"
-                                      className="img-fluid my-arrow-img"
-                                    />
+                                    <p className="">
+                                      <b>Upcoming Matches : </b>
+                                      {el.UpComingMatchesList[0].CCode === "" ||
+                                      null
+                                        ? "None"
+                                        : el.UpComingMatchesList[0].CCode +
+                                          " VS " +
+                                          el.UpComingMatchesList[0].CCode}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-3">
+                                <div className="my-arrow h-100">
+                                  <div className="d-flex justify-content-start align-items-center h-100">
+                                    <p className="">
+                                      <b>Date and Time : </b>
+                                      {el.UpComingMatchesList[0].CCode === "" ||
+                                      null
+                                        ? "None"
+                                        : this.dateTimeZone(
+                                            el.UpComingMatchesList[0].MDate
+                                          )}
+                                    </p>
                                   </div>
                                 </div>
                               </div>
