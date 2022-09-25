@@ -128,7 +128,7 @@ export default class Home extends Component {
                       return (
                         <>
                           <div className="card my-2 shadow " key={index}>
-                            <div className="row ">
+                            <div className="row">
                               <div className="col-1">
                                 <div className="wrapper-img">
                                   <img
@@ -138,7 +138,7 @@ export default class Home extends Component {
                                   />
                                 </div>
                               </div>
-                              <div className="col-6 mx-4">
+                              <div className="col-4 mx-4">
                                 <div className="wrap-my-content">
                                   <div className="my-content">
                                     <div className="anime-header">
@@ -160,14 +160,18 @@ export default class Home extends Component {
                                   </p>
                                 </div>
                               </div>
-                              <div className="col-2">
+                              <div className="col-4">
                                 <div className="my-arrow h-100">
                                   <div className="d-flex justify-content-end align-items-center h-100">
-                                    <img
-                                      src={arrowImage}
-                                      alt="arrow"
-                                      className="img-fluid my-arrow-img"
-                                    />
+                                    <p className="">
+                                      <b>Upcoming Matches : </b>
+                                      {el.UpComingMatchesList[0].CCode === "" ||
+                                      null
+                                        ? "None"
+                                        : el.UpComingMatchesList[0].CCode +
+                                          " VS " +
+                                          el.UpComingMatchesList[0].CCode}
+                                    </p>
                                   </div>
                                 </div>
                               </div>
