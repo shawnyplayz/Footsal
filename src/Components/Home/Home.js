@@ -7,6 +7,7 @@ import "./Home.css";
 import { AiOutlineArrowRight, AiOutlineSearch } from "react-icons/ai";
 import { BsArrowRightSquareFill, BsFillHeartFill } from "react-icons/bs";
 import arrowImage from "../../../src/images/arrow.jpg";
+import moment from "moment/moment";
 
 export default class Home extends Component {
   constructor(props) {
@@ -73,6 +74,7 @@ export default class Home extends Component {
     }
     return asd;
   }
+
   async handleAll(e) {
     await this.setState({
       searchQuery: e.target.value,
@@ -88,6 +90,14 @@ export default class Home extends Component {
     setTimeout(() => {
       this.search();
     }, 1000);
+  }
+  dateTimeZone(utcDate) {
+    debugger;
+    const date = new Date(utcDate);
+    console.log(date);
+    let formated = moment(date).format("DD - MM - YYYY h:mm:ss");
+    // var offset = date.getTimezoneOffset();
+    return formated;
   }
   render() {
     return (
@@ -138,7 +148,7 @@ export default class Home extends Component {
                                   />
                                 </div>
                               </div>
-                              <div className="col-4 mx-4">
+                              <div className="col-2 mx-4">
                                 <div className="wrap-my-content">
                                   <div className="my-content">
                                     <div className="anime-header">
@@ -160,7 +170,7 @@ export default class Home extends Component {
                                   </p>
                                 </div>
                               </div>
-                              <div className="col-4">
+                              <div className="col-3">
                                 <div className="my-arrow h-100">
                                   <div className="d-flex justify-content-end align-items-center h-100">
                                     <p className="">
@@ -171,6 +181,21 @@ export default class Home extends Component {
                                         : el.UpComingMatchesList[0].CCode +
                                           " VS " +
                                           el.UpComingMatchesList[0].CCode}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                              <div className="col-3">
+                                <div className="my-arrow h-100">
+                                  <div className="d-flex justify-content-start align-items-center h-100">
+                                    <p className="">
+                                      <b>Date and Time : </b>
+                                      {el.UpComingMatchesList[0].CCode === "" ||
+                                      null
+                                        ? "None"
+                                        : this.dateTimeZone(
+                                            el.UpComingMatchesList[0].MDate
+                                          )}
                                     </p>
                                   </div>
                                 </div>
@@ -197,7 +222,7 @@ export default class Home extends Component {
                                   />
                                 </div>
                               </div>
-                              <div className="col-6 mx-4">
+                              <div className="col-4 mx-4">
                                 <div className="wrap-my-content">
                                   <div className="my-content">
                                     <div className="anime-header">
@@ -219,7 +244,7 @@ export default class Home extends Component {
                                   </p>
                                 </div>
                               </div>
-                              <div className="col-2">
+                              <div className="col-5">
                                 <div className="my-arrow h-100">
                                   <div className="d-flex justify-content-end align-items-center h-100">
                                     <img
