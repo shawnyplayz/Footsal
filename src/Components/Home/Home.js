@@ -56,11 +56,9 @@ export default class Home extends Component {
     });
   }
   intenseSearch(searched) {
-    debugger;
     let asd = [];
     let searchLength = searched.length;
     for (let i = 0; i < this.state.footLength; i++) {
-      debugger;
       if (
         searched ===
           this.state.footArr[i].PFName.substring(
