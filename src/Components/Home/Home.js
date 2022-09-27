@@ -8,6 +8,7 @@ import { AiOutlineArrowRight, AiOutlineSearch } from "react-icons/ai";
 import { BsArrowRightSquareFill, BsFillHeartFill } from "react-icons/bs";
 import arrowImage from "../../../src/images/arrow.jpg";
 import moment from "moment/moment";
+import Content from "../Content/Content";
 
 export default class Home extends Component {
   constructor(props) {
@@ -115,7 +116,7 @@ export default class Home extends Component {
   render() {
     return (
       <div className="container p-0">
-        <h1 className="display-3 my-head">footsal</h1>
+        <h1 className="display-3 my-head">Footsal</h1>
         <div className="row">
           <div className="row justify-content-center ">
             <div className="col-lg-6 col-md-6 col-sm-12 my-3">
@@ -139,161 +140,18 @@ export default class Home extends Component {
             </div>
           </div>
         </div>
-        <div className="row shadow-lg">
-          <div className="row justify-content-center">
-            <div className="col-lg-12 ">
-              <div className=" p-2 mt-4">
-                {this.state.searchTrigger === false
-                  ? this.state.footArr.map((el, index) => {
-                      // const Images = React.lazy(() =>
-                      //   import(`../../player-images/${el.Id}`)
-                      // );
-                      let imigur = this.imageRender(el.Id);
-                      return (
-                        <>
-                          <div className="card my-2 shadow " key={index}>
-                            <div className="row">
-                              <div className="col-1">
-                                <div className="wrapper-img">
-                                  <img
-                                    src={imigur}
-                                    alt="img"
-                                    className="img-fluid  anime-img"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-2 mx-4">
-                                <div className="wrap-my-content">
-                                  <div className="my-content">
-                                    <div className="anime-header">
-                                      <p className="anime-title">{el.PFName}</p>
-                                    </div>
-                                    <div className="anime-btns">
-                                      <p className="my-2 me-4 my-btn">
-                                        {el.SkillDesc}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-2">
-                                <div className="wrap-my-heart h-100 my-3">
-                                  <p className="">
-                                    <b>Value :</b>
-                                    {"$" + el.Value + "M"}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="col-3">
-                                <div className="my-arrow h-100">
-                                  <div className="d-flex justify-content-end align-items-center h-100">
-                                    <p className="">
-                                      <b>Upcoming Matches : </b>
-                                      {el.UpComingMatchesList[0].CCode === "" ||
-                                      null
-                                        ? "None"
-                                        : el.UpComingMatchesList[0].CCode +
-                                          " VS " +
-                                          el.UpComingMatchesList[0].CCode}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-3">
-                                <div className="my-arrow h-100">
-                                  <div className="d-flex justify-content-start align-items-center h-100">
-                                    <p className="">
-                                      <b>Date and Time : </b>
-                                      {el.UpComingMatchesList[0].CCode === "" ||
-                                      null
-                                        ? "None"
-                                        : this.dateTimeZone(
-                                            el.UpComingMatchesList[0].MDate
-                                          )}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      );
-                    })
-                  : this.state.searchArr.map((el, index) => {
-                      let imigur = this.imageRender(el.Id);
+        <div class="container">
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-5">
+            {this.state.searchTrigger === false
+              ? this.state.footArr.map((el, index) => {
+                  let imigur = this.imageRender(el.Id);
+                  return <Content img={imigur} item={el} />;
+                })
+              : this.state.searchArr.map((el, index) => {
+                  let imigur = this.imageRender(el.Id);
 
-                      return (
-                        <>
-                          <div className="card my-2 shadow " key={index}>
-                            <div className="row">
-                              <div className="col-1">
-                                <div className="wrapper-img">
-                                  <img
-                                    src={imigur}
-                                    alt="img"
-                                    className="img-fluid  anime-img"
-                                  />
-                                </div>
-                              </div>
-                              <div className="col-2 mx-4">
-                                <div className="wrap-my-content">
-                                  <div className="my-content">
-                                    <div className="anime-header">
-                                      <p className="anime-title">{el.PFName}</p>
-                                    </div>
-                                    <div className="anime-btns">
-                                      <p className="my-2 me-4 my-btn">
-                                        {el.SkillDesc}
-                                      </p>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-2">
-                                <div className="wrap-my-heart h-100 my-3">
-                                  <p className="">
-                                    <b>Value :</b>
-                                    {"$" + el.Value + "M"}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="col-3">
-                                <div className="my-arrow h-100">
-                                  <div className="d-flex justify-content-end align-items-center h-100">
-                                    <p className="">
-                                      <b>Upcoming Matches : </b>
-                                      {el.UpComingMatchesList[0].CCode === "" ||
-                                      null
-                                        ? "None"
-                                        : el.UpComingMatchesList[0].CCode +
-                                          " VS " +
-                                          el.UpComingMatchesList[0].CCode}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                              <div className="col-3">
-                                <div className="my-arrow h-100">
-                                  <div className="d-flex justify-content-start align-items-center h-100">
-                                    <p className="">
-                                      <b>Date and Time : </b>
-                                      {el.UpComingMatchesList[0].CCode === "" ||
-                                      null
-                                        ? "None"
-                                        : this.dateTimeZone(
-                                            el.UpComingMatchesList[0].MDate
-                                          )}
-                                    </p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </>
-                      );
-                    })}
-              </div>
-            </div>
+                  return <Content img={imigur} item={el} />;
+                })}
           </div>
         </div>
         <ToastContainer />
